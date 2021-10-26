@@ -8,6 +8,7 @@ import com.innovation.platform.po.User;
 public interface UserService {
     /**
      * 添加用户
+     *
      * @param user
      * @return
      */
