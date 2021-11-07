@@ -10,6 +10,7 @@ import com.innovation.platform.po.User;
 import com.innovation.platform.reply.ResponseStat;
 import com.innovation.platform.reply.ResponseStatHelper;
 import com.innovation.platform.service.IUserService;
+import com.innovation.platform.utils.BaseCopyUtils;
 import com.innovation.platform.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,19 +41,19 @@ public class UserController {
     ResponseStat<Map<String,Object>> login(@RequestBody UserDto userDto){
         try {
             Map<String,Object> data = new HashMap<>(5);
-            QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
-            QueryWrapper<User> query = userQueryWrapper.eq("openid", userDto.getOpenid());
+            QueryWrapper<User> query = new QueryWrapper<User>().eq("openid", userDto.getOpenid());
             User user = userService.getOne(query);
             if (user==null){
-                Map<String,Object> param = new HashMap<>();
+                Map<String,Object> param = new HashMap<>(10);
                 data.put("first",true);
+                //请求数据
                 HttpResponse resp = HttpRequest
                         .post(UserConstants.URL.message)
                         .form(param)
                         .timeout(20000)
                         .execute();
                 String userInf = resp.body();
-                addPropertyByJsonString(userDto,userInf);
+                JsonUtil.addPropertiesToExistedObjByJsonStr(userDto,userInf) ;
                 userService.save(dtoConvert(userDto));
             }
             else {
@@ -66,16 +66,10 @@ public class UserController {
         }
     }
 
-    private void addPropertyByJsonString(UserDto userDto, String userInf) {
-        try {
-            Map<String,Object> map = JsonUtil.jsonToMapNotIncludeNull(userInf);
-            map.get("");
-        } catch (IOException e) {
-            log.error("添加属性失败",e);
-        }
-    }
 
-    private User dtoConvert(UserDto userDtoDetail) {
-        return null;
+    private User dtoConvert(UserDto userDto) {
+        User user = new User();
+        BaseCopyUtils.copy(userDto,user);
+        return user;
     }
 }
