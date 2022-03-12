@@ -135,9 +135,9 @@ public class CodeGenerator {
 //        strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
-        //表名
-//        strategy.setInclude(new String[]{
-//                "user"});
+        //想要自动生成对表明，注释了默认全部！！！！，注意是会覆盖到原来对代码，最好还是只添加呢想要的table
+        strategy.setInclude(new String[]{
+                "hello"});
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);
