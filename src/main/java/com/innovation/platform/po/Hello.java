@@ -46,4 +46,8 @@ public class Hello implements Serializable {
     public Hello(String name, Long editUserId, String password) {
         this(null,editUserId,name,password);
     }
+
+    public Hello() {
+
+    }
 }

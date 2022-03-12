@@ -4,6 +4,7 @@ import com.innovation.platform.po.Hello;
 import com.innovation.platform.mapper.HelloMapper;
 import com.innovation.platform.service.IHelloService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +18,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class HelloServiceImpl extends ServiceImpl<HelloMapper, Hello> implements IHelloService {
 
+    @Override
+    public Hello hello() {
+        return new Hello();
+    }
 }

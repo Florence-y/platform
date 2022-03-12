@@ -1,6 +1,7 @@
 package com.innovation.platform.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.innovation.platform.po.Hello;
 import com.innovation.platform.reply.ResponseStat;
 import com.innovation.platform.reply.ResponseStatHelper;
@@ -44,6 +45,16 @@ public class HelloController {
         //ID自增不用加
         Hello hello = new Hello(name, editUserId, password);
         boolean save = iHelloService.save(hello);
+        //可以配置where后面条件的对象
+        QueryWrapper<Hello> queryWrapper = new QueryWrapper<>();
+        // 这个的意思就是name = florenwu
+        queryWrapper.eq("name","florenwu");
+        // id> 1
+        queryWrapper.gt("id",111);
+        // id>=1
+        queryWrapper.ge("id",111);
+        //根据上述条件获取的hello对象
+        Hello one = iHelloService.getOne(queryWrapper);
         return ResponseStatHelper.success("添加成功",hello);
     }
 }
