@@ -36,4 +36,14 @@ public class Hello implements Serializable {
     private String password;
 
 
+    public Hello(Long id, Long editUserId, String name, String password) {
+        this.id = id;
+        this.editUserId = editUserId;
+        this.name = name;
+        this.password = password;
+    }
+
+    public Hello(String name, Long editUserId, String password) {
+        this(null,editUserId,name,password);
+    }
 }
