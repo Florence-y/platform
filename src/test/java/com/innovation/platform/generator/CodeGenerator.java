@@ -136,8 +136,8 @@ public class CodeGenerator {
         // 写于父类中的公共字段
 //        strategy.setSuperEntityColumns("id");
         //表名
-        strategy.setInclude(new String[]{
-                "user"});
+//        strategy.setInclude(new String[]{
+//                "user"});
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);
