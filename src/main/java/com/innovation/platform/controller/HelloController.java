@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,20 +29,21 @@ public class HelloController {
     IHelloService iHelloService;
 
 
-
+    // GET http://localhost:8080/platform/hello/1
     @GetMapping("/{id}")
     public ResponseStat<Hello> hello(@PathVariable(name = "id") Long id) {
         Hello byId = iHelloService.getById(id);
-        return ResponseStatHelper.success("success",byId);
+        return ResponseStatHelper.success("success", byId);
     }
 
+    // POST http://localhost:8080/platform/hello/save
     @PostMapping("/save")
     public ResponseStat<Hello> save(@RequestParam(value = "name", defaultValue = "World") String name,
-                             @RequestParam(value = "editUserId", defaultValue = "123213") Long editUserId,
-                             @RequestParam(value = "editUserId", defaultValue = "123213") String password) {
+                                    @RequestParam(value = "editUserId", defaultValue = "123213") Long editUserId,
+                                    @RequestParam(value = "editUserId", defaultValue = "123213") String password) {
         //ID自增不用加
-        Hello hello = new Hello(name,editUserId,password);
+        Hello hello = new Hello(name, editUserId, password);
         boolean save = iHelloService.save(hello);
-        return ResponseStatHelper.success("添加成功");
+        return ResponseStatHelper.success("添加成功",hello);
     }
 }

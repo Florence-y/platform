@@ -3,3 +3,4 @@
 1. src/main/resources/application.yml：配置相应对端口，username，password
 2. doc/开发文档.md:  在登陆了mysql后，**按照顺序** 去将里面对sql语句黏贴进去数据库中使用即可
 ## 二、
+1. HelloController为模版控制器，其他controller可以尝试模仿着照写
