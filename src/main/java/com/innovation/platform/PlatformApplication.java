@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Florence
  */
 @SpringBootApplication
-@MapperScan("com.innovation.platform.mappers")
+@MapperScan("com.innovation.platform.mapper")
 public class PlatformApplication {
 
     public static void main(String[] args) {
