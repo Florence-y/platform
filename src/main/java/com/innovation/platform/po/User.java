@@ -1,20 +1,19 @@
 package com.innovation.platform.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
-
 /**
  * <p>
- * 用户表
+ * 
  * </p>
  *
  * @author Florence
- * @since 2021-11-07
+ * @since 2022-03-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -28,31 +27,44 @@ public class User implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    /**
-     * 用户昵称
-     */
+    private String dataCode;
+
     private String nickName;
 
-    /**
-     * 用户首次注册的类型
-     */
-    private Integer type;
-
-    /**
-     * 头像
-     */
     @TableField("avatar_Url")
     private String avatarUrl;
 
+    private String sex;
+
+    private String personalSign;
+
+    private String attentions;
+
+    private String fans;
+
+    private String favorite;
+
+    private String publish;
+
+    private String seen;
+
+    private Integer experience;
+
+    private Integer pictureFrame;
+
+    private Integer theme;
+
+    private Integer type;
+
     /**
-     * 如果是app端，需要用这个获取用户信息
+     * app
      */
     private String openid;
 
     /**
-     * 数据一致码
+     *  0 1
      */
-    private String dataCode;
+    private Integer userType;
 
 
 }
